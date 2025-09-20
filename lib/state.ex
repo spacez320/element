@@ -6,24 +6,21 @@ defmodule State do
   end
 
   def get(state) do
-    # IO.puts(Agent.get(:foo, &Map.get(&1, :contents)))
-    Agent.get(state, &Map.get(&1, :contents))
+    agent_get = fn
+      state -> Map.get(state, :contents)
+    end
+
+    Agent.get(state, agent_get)
   end
 
   def put(state, contents) do
-    File.write(&Map.get(&1, :file), contents)
-    Agent.update(state, &Map.update!(&1, :contents, fn -> contents end))
-  end
+    agent_put = fn
+      state ->
+        file = Map.get(state, :file)
+        File.write(file, contents)
+        %{:file => file, :contents => File.read(file)}
+    end
 
-  # defp loop(file) do
-  #   receive do
-  #     {:get, caller} ->
-  #       {:ok, contents} = File.read(file)
-  #       send(caller, contents)
-  #
-  #     {:put, contents} ->
-  #       File.write(file, contents)
-  #       loop(file)
-  #   end
-  # end
+    Agent.update(state, agent_put)
+  end
 end
