@@ -1,6 +1,6 @@
-defmodule Iliovasilema do
+defmodule Element do
   @moduledoc """
-  Documentation for `Iliovasilema`.
+  Documentation for `Element`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Iliovasilema do
 
   ## Examples
 
-      iex> Iliovasilema.hello()
+      iex> Element.hello()
       :world
 
   """
