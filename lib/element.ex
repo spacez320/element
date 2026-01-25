@@ -1,18 +1,12 @@
 defmodule Element do
-  @moduledoc """
-  Documentation for `Element`.
-  """
+  use Application
 
-  @doc """
-  Hello world.
+  @impl true
+  def start(_type, _args) do
+    children = [
+      {Registry, name: Element, keys: :unique}
+    ]
 
-  ## Examples
-
-      iex> Element.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    Supervisor.start_link(children, strategy: :one_for_one)
   end
 end
