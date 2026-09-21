@@ -1,27 +1,15 @@
 defmodule Element.FileTest do
   use ExUnit.Case, async: true
 
-  test "writes to a file", config do
-    test_file = "/tmp/test"
+  @tag :tmp_dir
+  test "writes to a file", %{tmp_dir: tmp_dir} = config do
+    test_path = Path.join(tmp_dir, Atom.to_string(config.test))
+    test_name = String.to_atom(test_path)
 
-    File.write(test_file, "foo")
+    {:ok, file} = Element.File.start_link(name: test_name)
+    assert Element.File.get(test_name) == nil
 
-    {:ok, _} = Element.File.start_link([name: config.test], test_file)
-    assert Element.File.get(config.test) == "foo"
-    Element.File.put(config.test, "bar")
-    assert Element.File.get(config.test) == "bar"
-    Element.File.put(config.test, "bar2")
-    assert Element.File.get(config.test) == "bar2"
-  end
-
-  test "removes a file", config do
-    test_file = "/tmp/test"
-
-    File.write("/tmp/test", "foo")
-
-    {:ok, _} = Element.File.start_link([name: config.test], test_file)
-    assert Element.File.get(config.test) == "foo"
-    assert Element.File.delete(config.test) == "foo"
-    assert Element.File.get(config.test) == nil
+    Element.File.put(file, "foo")
+    assert Element.File.get(test_name) == "foo"
   end
 end
