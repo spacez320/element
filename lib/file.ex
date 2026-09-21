@@ -24,13 +24,13 @@ defmodule Element.File do
   #       name: __MODULE__
   #     )
   #   end
-  #
-  #   def delete() do
-  #     Agent.get_and_update(__MODULE__, fn s ->
-  #       :ok = File.rm(Map.get(s, :file))
-  #       {Map.get(s, :contents), Map.put(s, :contents, nil)}
-  #     end)
-  #   end
+
+  def delete(file) do
+    Agent.get_and_update(file, fn state ->
+      :ok = File.rm(Atom.to_string(Map.get(state, :file)))
+      {Map.get(state, :contents), Map.put(state, :contents, nil)}
+    end)
+  end
 
   def get(file) do
     Agent.get(file, &Map.get(&1, :contents))
