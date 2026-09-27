@@ -4,7 +4,7 @@ defmodule Element.FileTest do
   @tag :tmp_dir
   test "writes to a file", %{tmp_dir: tmp_dir} = config do
     test_path = Path.join(tmp_dir, Atom.to_string(config.test))
-    test_name = String.to_atom(test_path)
+    test_name = {:via, Registry, {Element.File, test_path}}
 
     {:ok, file} = Element.File.start_link(name: test_name)
     assert Element.File.get(test_name) == nil
@@ -16,7 +16,7 @@ defmodule Element.FileTest do
   @tag :tmp_dir
   test "deletes a file and returns its contents", %{tmp_dir: tmp_dir} = config do
     test_path = Path.join(tmp_dir, Atom.to_string(config.test))
-    test_name = String.to_atom(test_path)
+    test_name = {:via, Registry, {Element.File, test_path}}
 
     {:ok, file} = Element.File.start_link(name: test_name)
     Element.File.put(file, "foo")

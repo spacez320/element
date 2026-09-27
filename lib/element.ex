@@ -5,8 +5,11 @@ defmodule Element do
   def start(_type, _args) do
     # Define the children that will be supervised
     children = [
+      # Registry defines process names for Element.File Agents
+      #
+      # TODO Should this registry be used for any type of Agent?
+      {Registry, name: Element.File, keys: :unique}
       # {Element.File, "/tmp/test"}
-      # {Registry, name: Element, keys: :unique},
       # {DynamicSupervisor, name: Element.FileSupervisor, strategy: :one_for_one}
       # {Element.File.DynamicSupervisor, name: Element.FileSupervisor, strategy: :one_for_one}
     ]
