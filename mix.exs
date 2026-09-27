@@ -1,9 +1,9 @@
-defmodule Iliovasilema.MixProject do
+defmodule Element.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :iliovasilema,
+      app: :element,
       deps: deps(),
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
@@ -14,7 +14,9 @@ defmodule Iliovasilema.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      env: [],
+      extra_applications: [:logger],
+      mod: {Element, []}
     ]
   end
 

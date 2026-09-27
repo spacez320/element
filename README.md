@@ -1,21 +1,15 @@
-# Iliovasilema
+# Element
 
-**TODO: Add description**
+This is an infrastructure-as-code tool I'm working on to address common pitfalls in other mainstram projects.
 
-## Installation
+1. It assumes that configuration management and bootstrapping are both just state management problems that can be combined into one software.
+2. It manages state with actors (as in [the Actor Model](https://en.wikipedia.org/wiki/Actor_model)).
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `iliovasilema` to your list of dependencies in `mix.exs`:
+The idea is that infrastructure can be managed in specific ways that are currently a little difficult:
 
-```elixir
-def deps do
-  [
-    {:iliovasilema, "~> 0.1.0"}
-  ]
-end
-```
+1. Updates are transparent and show the entirety of what will be affected by a state change.
+2. Updates automatically propagate according to dependencies.
+3. Updates are very fast.
+4. State is immediately restored if changed out-of-band.
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/iliovasilema>.
-
+It is a hobby project and may not work as expected, or at all.
