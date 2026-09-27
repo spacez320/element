@@ -1,9 +1,10 @@
 # Element
 
-This is an infrastructure-as-code tool I'm working on to address common pitfalls in other mainstram projects.
+This is an infrastructure-as-code tool I'm working on to address common pitfalls in other mainstream projects.
 
 1. It assumes that configuration management and bootstrapping are both just state management problems that can be combined into one software.
 2. It manages state with actors (as in [the Actor Model](https://en.wikipedia.org/wiki/Actor_model)).
+3. It prefers a simple API that covers less ground but is easier to use.
 
 The idea is that infrastructure can be managed in specific ways that are currently a little difficult:
 
