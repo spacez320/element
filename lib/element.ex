@@ -1,7 +1,6 @@
 defmodule Element do
   use Application
 
-  # @impl true
   def start(_type, _args) do
     # Define the children that will be supervised
     children = [
@@ -9,9 +8,6 @@ defmodule Element do
       #
       # TODO Should this registry be used for any type of Agent?
       {Registry, name: Element.File, keys: :unique}
-      # {Element.File, "/tmp/test"}
-      # {DynamicSupervisor, name: Element.FileSupervisor, strategy: :one_for_one}
-      # {Element.File.DynamicSupervisor, name: Element.FileSupervisor, strategy: :one_for_one}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)
